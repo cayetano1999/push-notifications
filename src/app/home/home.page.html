@@ -10,8 +10,7 @@
       <ion-label>Notificaciones Push</ion-label>
       <ion-button>See All</ion-button>
     </ion-list-header>
-    {{pushService.messages | json}}
-    <ion-item *ngFor="let item of pushService.messages">
+    <ion-item *ngFor="let item of notifications">
       <ion-label>
         {{item?.payload?.title}}
         <p>{{item?.payload?.body}}</p>
