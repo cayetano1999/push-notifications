@@ -2,5 +2,8 @@
 	"appId": "io.ionic.starter",
 	"appName": "pushapp",
 	"webDir": "www",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"server": {
+		"url": "http://10.0.0.25:8100"
+	}
 }

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { OneSignal, OSNotification } from '@ionic-native/onesignal/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OneSingnalService {
+
+  messages: Array<OSNotification> = []
 
   constructor(private oneSignal: OneSignal) { 
 
@@ -13,11 +15,12 @@ export class OneSingnalService {
   initialize(){
     this.oneSignal.startInit('2f557dad-20bb-4a07-a678-426ccaf1adea', '442950157319');
 
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
     
     this.oneSignal.handleNotificationReceived().subscribe((receive) => {
      // do something when notification is received
-     console.log('Llego', receive)
+     console.log('Llego', receive);
+     this.notificationReceived(receive);
     });
     
     this.oneSignal.handleNotificationOpened().subscribe((open) => {
@@ -26,5 +29,19 @@ export class OneSingnalService {
     });
     
     this.oneSignal.endInit();
+  }
+
+  notificationReceived(not: OSNotification){
+    debugger;
+      const payload = not.payload;
+      const exist = this.messages.find(m=> m.payload.notificationID === payload.notificationID);
+      if(exist){
+        return;
+      }
+      this.messages.push(not);
+  }
+
+  getNotificaitons (){
+    return this.messages;
   }
 }
