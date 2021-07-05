@@ -11,6 +11,7 @@ export class OneSingnalService {
 
   messages: Array<OSNotification> = []
   temp: any;
+  userId: string  = '';
 
   pushListener = new EventEmitter<OSNotification>();
 
@@ -33,6 +34,11 @@ export class OneSingnalService {
       TEMP_DATA.NOTIFICATION = open.notification;
       await this.notificationReceived(open.notification);
     });
+
+      //Get
+      this.oneSignal.getIds().then(response=> {
+        this.userId = response.userId;
+      })
 
     this.oneSignal.endInit();
   }

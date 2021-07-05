@@ -13,7 +13,7 @@ export class HomePage implements OnInit, DoCheck {
 
   notifications: Array<OSNotification> = [];
 
-  constructor(private pushService: OneSingnalService, private appref: ApplicationRef, private storage: Storage) {
+  constructor(public pushService: OneSingnalService, private appref: ApplicationRef, private storage: Storage) {
 
   }
   ngDoCheck(): void {
